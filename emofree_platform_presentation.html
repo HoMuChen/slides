@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMOfree 平台選擇方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            overflow: hidden;
+            background: #1a1a1a;
+            color: #333;
+        }
+        
+        .presentation {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            background: #f8f9fa;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide-content {
+            max-width: 1000px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+        
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #34495e;
+            font-weight: 600;
+        }
+        
+        h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #34495e;
+            font-weight: 500;
+        }
+        
+        p {
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            padding: 12px 24px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .nav-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+        
+        .nav-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .slide-number {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            font-size: 1em;
+            color: #7f8c8d;
+        }
+        
+        /* Specific slide styles */
+        .title-slide {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .title-slide h1, .title-slide p {
+            color: white;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .comparison-table th {
+            background: #34495e;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .pros-cons {
+            display: flex;
+            gap: 40px;
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        .pros, .cons {
+            flex: 1;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        
+        .pros h3 {
+            color: #27ae60;
+        }
+        
+        .cons h3 {
+            color: #e74c3c;
+        }
+        
+        .pros ul, .cons ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .pros li::before {
+            content: "✓ ";
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .cons li::before {
+            content: "✗ ";
+            color: #e74c3c;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .highlight-box {
+            background: #3498db;
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 4px 20px rgba(52, 152, 219, 0.3);
+        }
+        
+        .highlight-box h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .tech-concept {
+            background: #ecf0f1;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .timeline {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px 0;
+        }
+        
+        .timeline-item {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .timeline-item .circle {
+            width: 80px;
+            height: 80px;
+            background: #3498db;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        .recommendation-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 30px auto;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .recommendation-card h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .recommendation-card p {
+            color: white;
+            font-size: 1.2em;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+            
+            .pros-cons {
+                flex-direction: column;
+            }
+            
+            .timeline {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <div class="slide-number">
+            <span id="current-slide">1</span> / <span id="total-slides">12</span>
+        </div>
+        
+        <!-- Slide 1: Title -->
+        <div class="slide active title-slide">
+            <div class="slide-content">
+                <h1>EMOfree 平台選擇方案</h1>
+                <p style="font-size: 1.5em; margin-top: 30px;">為您的心理健康平台選擇最適合的技術方案</p>
+                <p style="font-size: 1.2em; margin-top: 50px; opacity: 0.8;">簡報日期：2025年1月</p>
+            </div>
+        </div>
+        
+        <!-- Slide 2: Project Overview -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>什麼是 EMOfree？</h2>
+                <div style="text-align: left; max-width: 800px; margin: 0 auto;">
+                    <p style="font-size: 1.3em; margin-bottom: 30px;">一個創新的心理健康練習平台，專注於：</p>
+                    <ul style="font-size: 1.2em; line-height: 2;">
+                        <li>📱 每週推播練習主題</li>
+                        <li>✍️ 互動式練習（書寫、選擇、繪圖）</li>
+                        <li>📊 追蹤個人成長進度</li>
+                        <li>💬 即時回饋與支援</li>
+                        <li>🎯 個人化的心理健康旅程</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 3: The Challenge -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>我們面臨的選擇</h2>
+                <p style="font-size: 1.4em; margin-bottom: 40px;">如何在有限資源下，快速打造一個優質的平台？</p>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="circle">?</div>
+                        <h3>開發速度</h3>
+                        <p>多快能上線？</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="circle">$</div>
+                        <h3>成本考量</h3>
+                        <p>需要多少預算？</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="circle">⚡</div>
+                        <h3>未來擴展</h3>
+                        <p>能支撐成長嗎？</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 4: Three Options -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>三種開發方案</h2>
+                <div style="display: flex; gap: 30px; margin-top: 40px;">
+                    <div style="flex: 1; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 15px rgba(0,0,0,0.1);">
+                        <h3>方案一：Bubble</h3>
+                        <p style="color: #3498db; font-weight: bold;">無需編程平台</p>
+                        <p>像搭積木一樣建立網站</p>
+                    </div>
+                    <div style="flex: 1; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 15px rgba(0,0,0,0.1);">
+                        <h3>方案二：Strapi + 前端</h3>
+                        <p style="color: #9b59b6; font-weight: bold;">半客製化方案</p>
+                        <p>使用現成工具 + 客製化介面</p>
+                    </div>
+                    <div style="flex: 1; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 15px rgba(0,0,0,0.1);">
+                        <h3>方案三：全客製化</h3>
+                        <p style="color: #e74c3c; font-weight: bold;">完全自建系統</p>
+                        <p>從零開始打造專屬平台</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 5: Bubble Details -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>方案一：Bubble 無需編程平台</h2>
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h3>優點</h3>
+                        <ul>
+                            <li>4-8週快速上線</li>
+                            <li>無需技術背景</li>
+                            <li>開發成本最低（$5,000-10,000）</li>
+                            <li>內建會員系統</li>
+                            <li>快速修改與測試</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h3>缺點</h3>
+                        <ul>
+                            <li>功能受平台限制</li>
+                            <li>大量用戶時效能較差</li>
+                            <li>難以實現複雜功能</li>
+                            <li>月費隨用戶增加而提高</li>
+                            <li>未來轉換困難</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight-box">
+                    <h3>適合情況</h3>
+                    <p>快速驗證市場、預算有限、團隊無技術背景</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 6: Strapi Details -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>方案二：Strapi + 客製化前端</h2>
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h3>優點</h3>
+                        <ul>
+                            <li>8-12週完成開發</li>
+                            <li>介面完全客製化</li>
+                            <li>良好的擴展性</li>
+                            <li>支援AI功能整合</li>
+                            <li>技術掌控度高</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h3>缺點</h3>
+                        <ul>
+                            <li>需要前端工程師</li>
+                            <li>開發成本較高（$15,000-25,000）</li>
+                            <li>需要技術維護</li>
+                            <li>初期開發時間較長</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight-box">
+                    <h3>適合情況</h3>
+                    <p>重視品牌形象、有中長期發展計劃、需要AI功能</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 7: Full Custom Details -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>方案三：全客製化開發</h2>
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h3>優點</h3>
+                        <ul>
+                            <li>功能無限制</li>
+                            <li>最佳效能表現</li>
+                            <li>完全技術自主</li>
+                            <li>可打造獨特競爭優勢</li>
+                            <li>無平台限制</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h3>缺點</h3>
+                        <ul>
+                            <li>開發時間最長（16-24週）</li>
+                            <li>成本最高（$30,000-60,000）</li>
+                            <li>需要完整技術團隊</li>
+                            <li>維護複雜度高</li>
+                            <li>初期風險較大</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight-box">
+                    <h3>適合情況</h3>
+                    <p>資金充足、技術是核心競爭力、長期發展策略</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 8: Cost Comparison -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>成本比較一覽</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>項目</th>
+                            <th>Bubble</th>
+                            <th>Strapi + 前端</th>
+                            <th>全客製化</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>MVP開發成本</td>
+                            <td>$5,000-10,000</td>
+                            <td>$15,000-25,000</td>
+                            <td>$30,000-60,000</td>
+                        </tr>
+                        <tr>
+                            <td>開發時間</td>
+                            <td>4-8週</td>
+                            <td>8-12週</td>
+                            <td>16-24週</td>
+                        </tr>
+                        <tr>
+                            <td>月營運成本(1千用戶)</td>
+                            <td>$79-329</td>
+                            <td>$50-250</td>
+                            <td>$80-450</td>
+                        </tr>
+                        <tr>
+                            <td>年維護成本</td>
+                            <td>$3,000-8,000</td>
+                            <td>$8,000-15,000</td>
+                            <td>$15,000-30,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Slide 9: Recommendation -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>我們的建議</h2>
+                <div class="recommendation-card">
+                    <h2>推薦方案：Strapi + Next.js</h2>
+                    <p>結合了開發速度與未來擴展性的最佳平衡</p>
+                </div>
+                <div style="text-align: left; max-width: 800px; margin: 40px auto;">
+                    <h3>為什麼選擇這個方案？</h3>
+                    <ul style="font-size: 1.2em; line-height: 2;">
+                        <li>✓ 符合 EMOfree 的品牌定位需求</li>
+                        <li>✓ 支援未來 AI 對話功能整合</li>
+                        <li>✓ 合理的開發成本與時程</li>
+                        <li>✓ 良好的擴展性，支撐業務成長</li>
+                        <li>✓ 技術掌控度高，避免平台鎖定</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 10: Development Path -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>建議的發展路徑</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="circle">1</div>
+                        <h3>第1-3個月</h3>
+                        <p>MVP開發</p>
+                        <p style="font-size: 0.9em;">基礎功能上線</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="circle">2</div>
+                        <h3>第4-6個月</h3>
+                        <p>功能優化</p>
+                        <p style="font-size: 0.9em;">根據用戶反饋改進</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="circle">3</div>
+                        <h3>第7-12個月</h3>
+                        <p>擴展功能</p>
+                        <p style="font-size: 0.9em;">加入AI對話等進階功能</p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 40px;">
+                    <h3>關鍵里程碑</h3>
+                    <p>3個月內上線MVP → 6個月達到1000用戶 → 12個月實現收支平衡</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 11: Technical Concepts -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>技術概念解釋</h2>
+                <div class="tech-concept">
+                    <h3>什麼是 API 與 UI 分離？</h3>
+                    <p>想像餐廳的廚房（API）和用餐區（UI）是分開的。這樣同一個廚房可以服務堂食、外帶、外送等不同方式，就像同一套商業邏輯可以支援網站、手機App等不同介面。</p>
+                </div>
+                <div class="tech-concept">
+                    <h3>什麼是 RAG（檢索增強生成）？</h3>
+                    <p>讓 AI 助手能夠查詢您的專業知識庫來回答問題。例如，用戶詢問特定練習方法時，AI 會先搜尋相關資料，再給出準確的回答。</p>
+                </div>
+                <div class="tech-concept">
+                    <h3>為什麼要考慮技術架構？</h3>
+                    <p>好的技術架構就像建築的地基，決定了未來能蓋多高、擴建多大。選擇適合的技術方案，能讓平台順利成長而不需要重建。</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 12: Next Steps -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>下一步行動</h2>
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <div style="background: white; padding: 40px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin-bottom: 30px;">
+                        <h3 style="color: #3498db; margin-bottom: 20px;">立即行動</h3>
+                        <ol style="text-align: left; font-size: 1.2em; line-height: 2;">
+                            <li>確認預算範圍與時程期望</li>
+                            <li>評估團隊技術能力或外包資源</li>
+                            <li>選擇最適合的開發方案</li>
+                            <li>開始 MVP 功能規劃</li>
+                        </ol>
+                    </div>
+                    <div class="highlight-box">
+                        <h3>我們的承諾</h3>
+                        <p>無論選擇哪種方案，我們都會全力支援，確保 EMOfree 成為領先的心理健康練習平台。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="navigation">
+        <button class="nav-btn" id="prev-btn" onclick="changeSlide(-1)">上一頁</button>
+        <button class="nav-btn" id="next-btn" onclick="changeSlide(1)">下一頁</button>
+    </div>
+    
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('total-slides').textContent = totalSlides;
+        
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+            
+            // Update navigation buttons
+            document.getElementById('prev-btn').disabled = currentSlide === 0;
+            document.getElementById('next-btn').disabled = currentSlide === totalSlides - 1;
+        }
+        
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' && currentSlide > 0) {
+                changeSlide(-1);
+            } else if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) {
+                changeSlide(1);
+            }
+        });
+        
+        // Touch support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50 && currentSlide < totalSlides - 1) {
+                changeSlide(1);
+            }
+            if (touchEndX > touchStartX + 50 && currentSlide > 0) {
+                changeSlide(-1);
+            }
+        }
+        
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
