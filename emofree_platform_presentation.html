@@ -297,7 +297,7 @@
 <body>
     <div class="presentation">
         <div class="slide-number">
-            <span id="current-slide">1</span> / <span id="total-slides">12</span>
+            <span id="current-slide">1</span> / <span id="total-slides">15</span>
         </div>
         
         <!-- Slide 1: Title -->
@@ -537,7 +537,148 @@
             </div>
         </div>
         
-        <!-- Slide 10: Development Path -->
+        <!-- Slide 10: Strapi Architecture -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Strapi + 客製化前端架構圖</h2>
+                <div style="background: white; padding: 40px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                    <svg viewBox="0 0 800 500" style="max-width: 800px; margin: 0 auto;">
+                        <!-- Backend Layer -->
+                        <rect x="50" y="50" width="700" height="120" fill="#34495e" rx="10"/>
+                        <text x="400" y="90" text-anchor="middle" fill="white" font-size="20" font-weight="bold">後端層 (Strapi CMS)</text>
+                        <text x="400" y="120" text-anchor="middle" fill="white" font-size="14">API 伺服器 | 資料庫 | 內容管理 | 用戶驗證</text>
+                        <text x="400" y="145" text-anchor="middle" fill="#ecf0f1" font-size="12">PostgreSQL / MySQL + RESTful API / GraphQL</text>
+                        
+                        <!-- API Layer -->
+                        <rect x="250" y="200" width="300" height="60" fill="#3498db" rx="5"/>
+                        <text x="400" y="235" text-anchor="middle" fill="white" font-size="16">API 層</text>
+                        
+                        <!-- Frontend Layer -->
+                        <rect x="50" y="290" width="220" height="120" fill="#9b59b6" rx="10"/>
+                        <text x="160" y="330" text-anchor="middle" fill="white" font-size="16" font-weight="bold">網頁前端</text>
+                        <text x="160" y="355" text-anchor="middle" fill="white" font-size="12">Next.js / React</text>
+                        <text x="160" y="380" text-anchor="middle" fill="white" font-size="12">響應式設計</text>
+                        
+                        <rect x="290" y="290" width="220" height="120" fill="#e74c3c" rx="10"/>
+                        <text x="400" y="330" text-anchor="middle" fill="white" font-size="16" font-weight="bold">手機 App</text>
+                        <text x="400" y="355" text-anchor="middle" fill="white" font-size="12">React Native</text>
+                        <text x="400" y="380" text-anchor="middle" fill="white" font-size="12">iOS + Android</text>
+                        
+                        <rect x="530" y="290" width="220" height="120" fill="#27ae60" rx="10"/>
+                        <text x="640" y="330" text-anchor="middle" fill="white" font-size="16" font-weight="bold">管理後台</text>
+                        <text x="640" y="355" text-anchor="middle" fill="white" font-size="12">Strapi Admin</text>
+                        <text x="640" y="380" text-anchor="middle" fill="white" font-size="12">內容編輯介面</text>
+                        
+                        <!-- Arrows -->
+                        <path d="M 160 290 L 160 260 L 400 260 L 400 260" stroke="#555" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                        <path d="M 400 290 L 400 260" stroke="#555" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                        <path d="M 640 290 L 640 260 L 400 260" stroke="#555" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                        <path d="M 400 200 L 400 170" stroke="#555" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                        
+                        <!-- Arrow marker -->
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#555"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+                <p style="margin-top: 30px; font-size: 1.2em;">統一的後端 API 服務多個前端應用，確保資料一致性與開發效率</p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Technical Benefits -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Strapi 方案的技術優勢</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px;">
+                    <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 15px rgba(0,0,0,0.1);">
+                        <h3 style="color: #3498db;">🚀 快速開發</h3>
+                        <ul style="text-align: left; margin-top: 20px;">
+                            <li>內建用戶管理系統</li>
+                            <li>自動生成 API 端點</li>
+                            <li>視覺化內容建模</li>
+                            <li>即時預覽功能</li>
+                        </ul>
+                    </div>
+                    <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 15px rgba(0,0,0,0.1);">
+                        <h3 style="color: #27ae60;">🔧 靈活擴展</h3>
+                        <ul style="text-align: left; margin-top: 20px;">
+                            <li>插件生態系統豐富</li>
+                            <li>可自訂 API 邏輯</li>
+                            <li>支援自訂欄位類型</li>
+                            <li>輕鬆整合第三方服務</li>
+                        </ul>
+                    </div>
+                    <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 15px rgba(0,0,0,0.1);">
+                        <h3 style="color: #9b59b6;">💎 品牌客製</h3>
+                        <ul style="text-align: left; margin-top: 20px;">
+                            <li>前端完全自訂設計</li>
+                            <li>符合品牌視覺規範</li>
+                            <li>優化使用者體驗</li>
+                            <li>響應式跨裝置支援</li>
+                        </ul>
+                    </div>
+                    <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 15px rgba(0,0,0,0.1);">
+                        <h3 style="color: #e74c3c;">🤖 AI 整合</h3>
+                        <ul style="text-align: left; margin-top: 20px;">
+                            <li>輕鬆整合 OpenAI API</li>
+                            <li>實現 RAG 對話功能</li>
+                            <li>智能內容推薦</li>
+                            <li>個人化學習路徑</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Implementation Plan -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Strapi 方案實施計劃</h2>
+                <div style="background: #f8f9fa; padding: 40px; border-radius: 15px; margin: 30px auto; max-width: 900px;">
+                    <h3 style="color: #34495e; margin-bottom: 30px;">12 週開發時程表</h3>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                        <div style="background: white; padding: 25px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                            <h4 style="color: #3498db;">第 1-4 週</h4>
+                            <p style="font-weight: bold; margin: 10px 0;">基礎建設</p>
+                            <ul style="text-align: left; font-size: 0.9em;">
+                                <li>Strapi 環境設置</li>
+                                <li>資料模型設計</li>
+                                <li>用戶認證系統</li>
+                                <li>基礎 API 開發</li>
+                            </ul>
+                        </div>
+                        <div style="background: white; padding: 25px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                            <h4 style="color: #9b59b6;">第 5-8 週</h4>
+                            <p style="font-weight: bold; margin: 10px 0;">前端開發</p>
+                            <ul style="text-align: left; font-size: 0.9em;">
+                                <li>Next.js 專案架構</li>
+                                <li>UI/UX 設計實作</li>
+                                <li>練習功能介面</li>
+                                <li>響應式設計</li>
+                            </ul>
+                        </div>
+                        <div style="background: white; padding: 25px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                            <h4 style="color: #27ae60;">第 9-12 週</h4>
+                            <p style="font-weight: bold; margin: 10px 0;">整合與優化</p>
+                            <ul style="text-align: left; font-size: 0.9em;">
+                                <li>前後端整合</li>
+                                <li>功能測試</li>
+                                <li>效能優化</li>
+                                <li>部署上線</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="highlight-box">
+                    <h3>預期成果</h3>
+                    <p>12 週完成功能完整的 MVP，包含會員系統、練習內容管理、互動練習功能</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Development Path -->
         <div class="slide">
             <div class="slide-content">
                 <h2>建議的發展路徑</h2>
@@ -568,7 +709,7 @@
             </div>
         </div>
         
-        <!-- Slide 11: Technical Concepts -->
+        <!-- Slide 14: Technical Concepts -->
         <div class="slide">
             <div class="slide-content">
                 <h2>技術概念解釋</h2>
@@ -587,7 +728,7 @@
             </div>
         </div>
         
-        <!-- Slide 12: Next Steps -->
+        <!-- Slide 15: Next Steps -->
         <div class="slide">
             <div class="slide-content">
                 <h2>下一步行動</h2>
